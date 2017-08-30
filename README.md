@@ -4,12 +4,16 @@ My fork of xwinwrap.
 Xwinwrap allows you to stick most of the apps to your desktop background.  
 My use case - can use gif as a background
 
-### Compiling
+### Installing
 
-`gcc -Wall xwinwrap.c -lX11 -lXext -lXrender -g -o xwinwrap`
-
-You may have to use `-L` flag to specify directory for xlib.
-e.g. `gcc -Wall xwinwrap.c -L /usr/lib/x86_64-linux-gnu -lX11 -lXext -lXrender -g -o xwinwrap`
+```
+sudo apt-get install xorg-dev build-essential libx11-dev x11proto-xext-dev libxrender-dev libxext-dev
+git clone https://github.com/ujjwal96/xwinwrap.git
+cd xwinwrap
+make
+sudo make install
+make clean
+```
 
 ### Usage
 
@@ -33,7 +37,7 @@ Options:
              -debug  - Enable debug messages
 ```
 Example
-`./xwinwrap -g 400x400 -ni -s -nf -b -un -argb -sh circle -- gifview -w WID mygif.gif -a`
+`xwinwrap -g 400x400 -ni -s -nf -b -un -argb -sh circle -- gifview -w WID mygif.gif -a`
 
 ### Changes
 
