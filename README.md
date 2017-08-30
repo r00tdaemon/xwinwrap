@@ -4,6 +4,8 @@ My fork of xwinwrap.
 Xwinwrap allows you to stick most of the apps to your desktop background.  
 My use case - can use gif as a background
 
+![demo gif](https://github.com/ujjwal96/xwinwrap/blob/demo/demo.gif)
+
 ### Installing
 
 ```
