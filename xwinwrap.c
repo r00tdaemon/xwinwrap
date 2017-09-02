@@ -283,6 +283,7 @@ int main(int argc, char **argv)
     bool above = false;
     bool skip_taskbar = false;
     bool skip_pager = false;
+    bool daemonize = false;
 
     win_shape   shape = SHAPE_RECT;
     Pixmap      mask;
@@ -366,6 +367,10 @@ int main(int argc, char **argv)
         {
             debug = true;
         }
+        else if (strcmp (argv[i], "-d") == 0)
+        {
+            daemonize = true;
+        }
         else if (strcmp (argv[i], "--") == 0)
         {
             break;
@@ -375,6 +380,35 @@ int main(int argc, char **argv)
             usage ();
             return 1;
         }
+    }
+
+    if (daemonize)
+    {
+        pid_t process_id = 0;
+        pid_t sid = 0;
+        process_id = fork();
+        if (process_id < 0)
+        {
+            fprintf(stderr, "fork failed!\n");
+            exit(1);
+        }
+
+        if (process_id > 0)
+        {
+            fprintf(stderr, "pid of child process %d \n", process_id);
+            exit(0);
+        }
+        umask(0);
+        sid = setsid();
+        if (sid < 0)
+        {
+            exit(1);
+        }
+
+        chdir("/");
+        close(STDIN_FILENO);
+        close(STDOUT_FILENO);
+        close(STDERR_FILENO);
     }
 
     for (i = i + 1; i < argc; i++)
