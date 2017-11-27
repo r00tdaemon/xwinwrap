@@ -36,6 +36,7 @@ Options:
              -o      - Opacity value between 0 to 1 (ex: -o 0.20)
              -sh     - Shape of window (choose between rectangle, circle or triangle. Default is rectangle)
              -ov     - Set override_redirect flag (For seamless desktop background integration in non-fullscreenmode)
+             -d      - Daemonize
              -debug  - Enable debug messages
 ```
 Example
