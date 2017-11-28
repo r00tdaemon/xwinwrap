@@ -20,11 +20,12 @@ make clean
 ### Usage
 
 ```
-Usage: xwinwrap [-g {w}x{h}+{x}+{y}] [-ni] [-argb] [-fs] [-s] [-st] [-sp] [-a] [-b] [-nf] [-o OPACITY] [-sh SHAPE] [-ov]-- COMMAND ARG1...
+Usage: xwinwrap [-g {w}x{h}+{x}+{y}] [-ni] [-argb] [-fdt] [-fs] [-s] [-st] [-sp] [-a] [-d] [-b] [-nf] [-o OPACITY] [-sh SHAPE] [-ov]-- COMMAND ARG1...
 Options:
              -g      - Specify Geometry (w=width, h=height, x=x-coord, y=y-coord. ex: -g 640x480+100+100)
              -ni     - Ignore Input
              -argb   - RGB
+             -fdt    - force WID window a desktop type window
              -fs     - Full Screen
              -un     - Undecorated
              -s      - Sticky
@@ -36,6 +37,7 @@ Options:
              -o      - Opacity value between 0 to 1 (ex: -o 0.20)
              -sh     - Shape of window (choose between rectangle, circle or triangle. Default is rectangle)
              -ov     - Set override_redirect flag (For seamless desktop background integration in non-fullscreenmode)
+             -d      - Daemonize
              -debug  - Enable debug messages
 ```
 Example

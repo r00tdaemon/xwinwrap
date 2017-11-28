@@ -133,12 +133,13 @@ static void sigHandler (int sig)
 static void usage (void)
 {
     fprintf(stderr, "%s \n", NAME);
-    fprintf (stderr, "\nUsage: %s [-g {w}x{h}+{x}+{y}] [-ni] [-argb] [-fs] [-s] [-st] [-sp] [-a] "
+    fprintf (stderr, "\nUsage: %s [-g {w}x{h}+{x}+{y}] [-ni] [-argb] [-fdt] [-fs] [-s] [-st] [-sp] [-a] [-d] "
              "[-b] [-nf] [-o OPACITY] [-sh SHAPE] [-ov]-- COMMAND ARG1...\n", NAME);
     fprintf (stderr, "Options:\n \
             -g      - Specify Geometry (w=width, h=height, x=x-coord, y=y-coord. ex: -g 640x480+100+100)\n \
             -ni     - Ignore Input\n \
             -argb   - RGB\n \
+            -fdt    - force WID window a desktop type window\n \
             -fs     - Full Screen\n \
             -un     - Undecorated\n \
             -s      - Sticky\n \
@@ -275,6 +276,7 @@ int main(int argc, char **argv)
     bool have_argb_visual = false;
     bool noInput = false;
     bool argb = false;
+    bool set_desktop_type = false;
     bool fullscreen = false;
     bool noFocus = false;
     bool override = false;
@@ -308,6 +310,10 @@ int main(int argc, char **argv)
         else if (strcmp (argv[i], "-argb") == 0)
         {
             argb = true;
+        }
+        else if (strcmp (argv[i], "-fdt") == 0)
+        {
+            set_desktop_type = true;
         }
         else if (strcmp (argv[i], "-fs") == 0)
         {
@@ -526,7 +532,12 @@ int main(int argc, char **argv)
         xa = ATOM(_NET_WM_WINDOW_TYPE);
 
         Atom prop;
-        prop = ATOM(_NET_WM_WINDOW_TYPE_NORMAL);
+        if (set_desktop_type)
+        {
+            prop = ATOM(_NET_WM_WINDOW_TYPE_DESKTOP);
+        } else {
+            prop = ATOM(_NET_WM_WINDOW_TYPE_NORMAL);
+        }
 
         XChangeProperty(display, window.window, xa, XA_ATOM, 32,
                         PropModeReplace, (unsigned char *) &prop, 1);
