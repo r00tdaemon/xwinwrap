@@ -20,11 +20,12 @@ make clean
 ### Usage
 
 ```
-Usage: xwinwrap [-g {w}x{h}+{x}+{y}] [-ni] [-argb] [-fs] [-s] [-st] [-sp] [-a] [-b] [-nf] [-o OPACITY] [-sh SHAPE] [-ov]-- COMMAND ARG1...
+Usage: xwinwrap [-g {w}x{h}+{x}+{y}] [-ni] [-argb] [-fdt] [-fs] [-s] [-st] [-sp] [-a] [-d] [-b] [-nf] [-o OPACITY] [-sh SHAPE] [-ov]-- COMMAND ARG1...
 Options:
              -g      - Specify Geometry (w=width, h=height, x=x-coord, y=y-coord. ex: -g 640x480+100+100)
              -ni     - Ignore Input
              -argb   - RGB
+             -fdt    - force WID window a desktop type window
              -fs     - Full Screen
              -un     - Undecorated
              -s      - Sticky
