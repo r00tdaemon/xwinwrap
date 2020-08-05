@@ -489,7 +489,7 @@ int main(int argc, char **argv)
             flags |= CWBackPixel;
         }
 
-        window.window = XCreateWindow(display, window.desktop, window.x,
+        window.window = XCreateWindow(display, window.root, window.x,
                                       window.y, window.width, window.height, 0, depth, InputOutput, visual,
                                       flags, &attrs);
         XLowerWindow(display, window.window);
