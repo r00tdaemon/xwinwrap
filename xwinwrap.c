@@ -152,6 +152,7 @@ static void usage (void)
             -sh     - Shape of window (choose between rectangle, circle or triangle. Default is rectangle)\n \
             -ov     - Set override_redirect flag (For seamless desktop background integration in non-fullscreenmode)\n \
             -d      - Daemonize\n \
+            -r      - Assume the root window is the desktop\n \
             -debug  - Enable debug messages\n");
 }
 
@@ -287,6 +288,7 @@ int main(int argc, char **argv)
     bool skip_taskbar = false;
     bool skip_pager = false;
     bool daemonize = false;
+    bool assume_root_window_is_desktop = false;
 
     win_shape   shape = SHAPE_RECT;
     Pixmap      mask;
@@ -378,6 +380,10 @@ int main(int argc, char **argv)
         {
             daemonize = true;
         }
+        else if(strcmp (argv[i], "-r") == 0)
+        {
+            assume_root_window_is_desktop = true;
+        }
         else if (strcmp (argv[i], "--") == 0)
         {
             break;
@@ -450,9 +456,18 @@ int main(int argc, char **argv)
     int depth = 0, flags = CWOverrideRedirect | CWBackingStore;
     Visual *visual = NULL;
 
-    if (!find_desktop_window(&window.root, &window.desktop)) {
-        fprintf (stderr, NAME": Error: couldn't find desktop window\n");
-        return 1;
+    if(assume_root_window_is_desktop)
+    {
+        Window true_root = RootWindow(display, screen);
+        window.root = true_root;
+        window.desktop = true_root;
+    }
+    else
+    {
+        if (!find_desktop_window(&window.root, &window.desktop)) {
+            fprintf (stderr, NAME": Error: couldn't find desktop window\n");
+            return 1;
+        }
     }
 
     if (argb && get_argb_visual(&visual, &depth))

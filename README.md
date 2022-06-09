@@ -38,10 +38,11 @@ Options:
              -sh     - Shape of window (choose between rectangle, circle or triangle. Default is rectangle)
              -ov     - Set override_redirect flag (For seamless desktop background integration in non-fullscreenmode)
              -d      - Daemonize
+             -r      - Assume the root window is the desktop
              -debug  - Enable debug messages
 ```
 Example
-`xwinwrap -g 400x400 -ni -s -nf -b -un -argb -sh circle -- gifview -w WID mygif.gif -a`
+`xwinwrap -g 400x400 -ni -s -nf -b -r -un -argb -sh circle -- gifview -w WID mygif.gif -a`
 
 ### Changes
 
